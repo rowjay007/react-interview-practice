@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-axios.get("https://randomuser.me/api").then((response) => {
-  console.log(response);
-});
+const randomData = () => {
+  return axios
+    .get("https://randomuser.me/api")
+    .then(({ data }) => {
+      console.log(data);
+      return JSON.stringify(data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
 
 const RandomUser = () => {
+  const [random, setRandom] = useState("");
+  useEffect(() => {});
+
   return (
     <div>
-      <button>Fetch Random Data</button>
+      <button onClick={() => randomData()}>Fetch Random Data</button>
     </div>
   );
 };
